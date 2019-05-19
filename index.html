@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bubbly drink</title>
+    <style>
+
+        :root {
+            --bg-color: rgb(13, 13, 13);
+            --bottom-color: #d90d14;
+            --top-color: #ffaa0d;
+            --all-height: 250px;
+            --all-width: 200px;
+            --cup-top: 140px;
+        }
+
+        @keyframes bubble-movement {
+            0% {
+                bottom: 0px;
+                font-size: x-small;
+                margin-left: 0;
+            }
+            25% {
+                margin-left: 10%;
+            }
+            50% {
+                margin-left: 0px;
+            }
+            75% {
+                margin-left: 10%;
+            }
+            100% {
+                bottom: 85%;
+                font-size: xx-large;
+                margin-left: 0px;
+            }
+        }
+
+        @keyframes bubble-growth {
+            from {
+                width: 5px;
+                height: 5px;
+                border-width: 1px;
+            }
+            to {
+                height: 15px;
+                width: 15px;
+                border-width: 3px;
+            }
+        }
+
+        @keyframes svg-bubble-growth {
+            from {
+                transform: scale(0.2);
+            }
+            to {
+                transform: scale(2);
+            }
+        }
+
+        @keyframes quick-spin {
+            from {
+                transform: rotateX(0);
+                color: red;
+            }
+            to {
+                transform: rotateX(180deg);
+                color: blue;
+            }
+        }
+
+        #frame {
+            border-color: rosybrown;
+            border-width: 15px;
+            border-style: ridge;
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            box-shadow: 15px 15px 20px -5px black;
+        }
+
+        #drink {
+            position: absolute;
+            left: 60px;
+        }
+
+        div[name="quick"] {
+            position: relative;
+            top: 15px;
+            left: 10px;
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        #straw {
+            position: relative;
+            transform: rotate(75deg);
+            top: 40px;
+            left: 50px;
+        }
+
+        ruby[class$="y2"]:hover {
+            color: brown;
+        }
+
+        ruby[class*="1"]:hover {
+            animation: quick-spin 2s linear 0s infinite alternate;
+        }
+
+
+        .main {
+            position: absolute;
+            height: var(--all-height);
+            width: var(--all-width);
+            top: calc(var(--cup-top) + 10px);
+            left: 40px;
+            background-image: linear-gradient(to bottom, white 20px, var(--bg-color) 20px, var(--bg-color));
+        }
+
+        img {
+            position: absolute;
+            width: 100%;
+        }
+
+        table {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            left: 50px;
+            border: 0;
+            border-bottom: 6px solid black;
+        }
+
+        .pseudo-classes {
+            position: absolute;
+            top: calc(var(--all-height) - calc(2 * calc(var(--all-height)/9)));
+            left: 0;
+            height: calc(var(--all-height) / 9);
+            width: 100%;
+            background-color: var(--bottom-color);
+        }
+
+        .pseudo-classes::after {
+            position: absolute;
+            content: "";
+            top: calc(var(--all-height) / 9);
+            left: 0;
+            height: calc(var(--all-height) / 9);
+            width: 100%;
+            background-color: var(--bottom-color);
+        }
+
+        .pseudo-classes::before {
+            position: absolute;
+            content: "";
+            bottom: calc(var(--all-height) / 9);
+            left: 0;
+            height: calc(var(--all-height) / 9);
+            width: 100%;
+            background-color: var(--bottom-color);
+        }
+
+        .gradient {
+            position: absolute;
+            width: 100%;
+            height: calc(var(--all-height) / 3);
+            top: calc(var(--all-height) / 3);
+            background-image: linear-gradient(to bottom, var(--top-color), var(--bottom-color));
+        }
+
+        .linear-gradient {
+            position: absolute;
+            background-color: var(--top-color);
+            width: 100%;
+            height: calc(calc(var(--all-height) / 3) - 20px);
+            top: 20px;
+        }
+
+        .linear-gradient,
+        .gradient,
+        .pseudo-classes {
+            mix-blend-mode: screen;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: 0px;
+            left: 50%;
+            color: white;
+            animation: bubble-movement 4s 0s infinite ease-in-out;
+        }
+
+        .main:hover {
+            --top-color: hsl(272, 58%, 35%);
+            --bottom-color: rgb(67, 137, 162);
+        }
+
+
+        .one {
+            animation-delay: 2s;
+            left: 25%;
+            text-shadow: 0 0 4px #7DF9FF;
+        }
+
+        svg {
+            height: 20px;
+            width: 20px;
+        }
+
+        .two {
+            animation: bubble-movement 4s 0s infinite ease-in-out, svg-bubble-growth 4s 0s infinite ease-in-out;
+            animation-delay: 1s;
+            left: 75%;
+        }
+
+        .three {
+            animation: bubble-movement 4s 0s infinite ease-in-out, bubble-growth 4s 0s infinite ease-in-out;
+            animation-delay: 3s;
+            left: 35%;
+            border-radius: 50%;
+            border-color: white;
+            border-style: outset;
+            background-color: green;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div id="frame">
+    <div id="drink">
+        <div name="quick">The <ruby class="ruby1" id="spin"><rb>quick</rb><rp>（</rp><rt>greita</rt><rp>) </rp></ruby></div>
+        <div id="straw"><ruby class="ruby2"><rb>brown</rb><rt>茶色</rt></ruby> fox jumps <br> over the lazy dog</div>
+        <div class="main">
+            <div class="bubble">⚪</div>
+            <div class="bubble one">o</div>
+            <svg class="bubble two"><circle cx="11" cy="11" r="3" stroke="white" stroke-width="1" fill="transparent"></circle></svg>
+            <div class="bubble three"></div>
+            <div class="linear-gradient"></div>
+            <div class="gradient"></div>
+            <div class="pseudo-classes"></div>
+            <img alt="cup" src="https://66.media.tumblr.com/bf3f5c3d749f5e064d74e8e14550771b/tumblr_pqqor0SGK91rbhm49o2_400.png">
+            <table></table>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
